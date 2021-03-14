@@ -9,13 +9,13 @@ public class Main {
         StringBuilder texto = new StringBuilder("[");
 
         //---Coloque aqui seu documento .txt (Ex: 2, 42, -23, 31) para ordená-lo---
-        int[] vetor = leitura("C:\\Users\\Gustavo\\Desktop\\dados.txt");
+        int[] vetor = leitura("C:\\Users\\Gustavo\\Desktop\\dadosA.txt");
 
         //---Inicio da contagem---
         long tempoInicial = System.currentTimeMillis();
 
         //quickSort(vetor, 0, vetor.length-1);
-        mergeSort(vetor.length, vetor);
+        //mergeSort(vetor.length, vetor);
         //shellSort(vetor);
 
         //---fim da contagem---
@@ -60,16 +60,18 @@ public class Main {
 
 
     //Algoritmos de Ordenacao
+
     //QuickSort
     private static void quickSort(int[] vetor, int inicio, int fim) {
         if (inicio < fim) {
             int posicaoPivo = separar(vetor, inicio, fim);
             quickSort(vetor, inicio, posicaoPivo - 1);
             quickSort(vetor, posicaoPivo + 1, fim);
-            movimentos++;
+
         }
     }
 
+        //separa maior e menor do pivor
     private static int separar(int[] vetor, int inicio, int fim) {
         int pivo = vetor[inicio];
         int i = inicio + 1, f = fim;
@@ -84,7 +86,9 @@ public class Main {
                 vetor[f] = troca;
                 i++;
                 f--;
+                movimentos++;
             }
+            movimentos++;
 
         }
         vetor[inicio] = vetor[f];
@@ -116,12 +120,12 @@ public class Main {
         }
     }
 
+        //unifica os vetores
     private static void intercala(int[] vetor, int inicio, int meio, int fim) {
         int[] novoVetor = new int[fim - inicio];
         int i = inicio;
         int m = meio;
         int pos = 0;
-        movimentos++;
         while(i < meio && m < fim) {
             if(vetor[i] <= vetor[m]) {
                 novoVetor[pos] = vetor[i];
@@ -131,8 +135,8 @@ public class Main {
                 novoVetor[pos] = vetor[m];
                 pos = pos + 1;
                 m = m + 1;
-
             }
+            movimentos++;
 
         }
 
@@ -140,12 +144,14 @@ public class Main {
             novoVetor[pos] = vetor[i];
             pos = pos + 1;
             i = i + 1;
+            movimentos++;
         }
 
         while(m < fim) {
             novoVetor[pos] = vetor[m];
             pos = pos + 1;
             m = m + 1;
+            movimentos++;
         }
 
         for(pos = 0, i = inicio; i < fim; i++, pos++) {
@@ -162,7 +168,6 @@ public class Main {
             for (int i = gap; i < n; i += 1)
             {
                 int temp = vetor[i];
-
                 int j;
                 for (j = i; j >= gap && vetor[j - gap] > temp; j -= gap)
                     vetor[j] = vetor[j - gap];
